@@ -127,16 +127,17 @@ def main():
         print(f"Error: {e}")
         return
 
+    event_name = os.environ.get("GITHUB_EVENT_NAME")
     changed_files_env = os.environ.get("CHANGED_FILES")
     
-    if changed_files_env is not None:
-        files = [f for f in changed_files_env.strip().split() if f]
-        if not files:
+    if event_name == "pull_request_target":
+        if not changed_files_env or not changed_files_env.strip():
             print("No relevant STAC Collections or OGC Records were modified in this PR. Skipping DOI generation.")
             return
+        files = [f for f in changed_files_env.strip().split() if f]
         print(f"Running audit on modified files only: {files}")
     else:
-        print("Running full repository audit...")
+        print(f"Running full repository audit (Event: {event_name})...")
         files = glob.glob("products/**/collection.json", recursive=True) + \
                 glob.glob("workflows/**/record.json", recursive=True)
 

@@ -17,7 +17,7 @@ The system automatically identifies the need for a DOI or an update by comparing
 - **Workflow Triggers:**
 ...
     - **Pull Requests:** When a PR is opened or updated, the system automatically audits the changed files. If a DOI is needed, it generates/updates a draft and **auto-commits** the change back to the PR branch (handling forks via `pull_request_target`).
-    - **Manual Audit:** Triggered via `workflow_dispatch`, it performs a global audit and creates a **new Pull Request** for any missing DOIs, providing a safety buffer for maintainers.
+    - **Scheduled/Manual Audit:** Triggered daily via a `schedule` or manually via `workflow_dispatch`, it performs a **full repository audit**. It creates a **new Pull Request** containing all items requiring a new or updated DOI, providing a safety buffer for maintainers.
 
 ### 2. Intelligent DOI Management
 To maintain a clean DataCite registry, the system distinguishes between drafts and published DOIs:
@@ -75,7 +75,7 @@ The following configurations must be set in the GitHub repository for the workfl
 | `DATACITE_PASSWORD` | DataCite Repository Password | **Yes** |
 | `DATACITE_PREFIX` | Assigned DOI Prefix (e.g., `10.xxxx`) | **Yes** |
 | `DATACITE_API_URL` | DataCite API Base URL (Defaults to `https://api.test.datacite.org`) | No |
-| `BOT_PAT` | Personal Access Token for auto-committing DOIs back to PRs from forks | No* |
+| `BOT_PAT` | Personal Access Token used to auto-commit DOIs back to PRs (handling forks) and to create the Scheduled/Manual Audit PRs so that CI validation workflows are triggered. | No* |
 
 *\*Highly recommended for a smooth contributor experience.*
 
