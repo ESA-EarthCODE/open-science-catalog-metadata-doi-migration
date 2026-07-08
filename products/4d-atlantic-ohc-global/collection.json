@@ -118,7 +118,7 @@
   "osc:variables": [
     "ocean-heat-budget"
   ],
-  "title": "Global Ocean Heat Content",
+  "title": "Global Ocean Heat Content - change to trigger new version (v2)",
   "extent": {
     "spatial": {
       "bbox": [
