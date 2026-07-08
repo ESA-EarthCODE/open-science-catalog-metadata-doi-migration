@@ -25,7 +25,7 @@
       "rel": "child",
       "href": "../../products/4d-atlantic-ohc-global/collection.json",
       "type": "application/json",
-      "title": "Global Ocean Heat Content"
+      "title": "Global Ocean Heat Content - change to trigger new version (v2)"
     },
     {
       "rel": "child",
