@@ -55,7 +55,7 @@ def surgical_update(file_path: str, doi: str):
                         match = re.search(r'^(\s+)"', content, re.MULTILINE)
                         indent = match.group(1) if match else "  "
                         pub_entry = f'{indent}"sci:publications": [\n{indent}{indent}{{"doi": "{existing_val}"}}\n{indent}],\n'
-                        content = re.sub(r'^\{(\r?\n)', r'{\g<1>' + pub_entry, content)
+                        content = re.sub(r'^(\s*)\{(\r?\n)', r'\g<1>{\g<2>' + pub_entry, content)
 
     # 2. Update/Insert sci:doi
     if '"sci:doi"' in content:
@@ -75,12 +75,12 @@ def surgical_update(file_path: str, doi: str):
                 # Fallback: insert after {
                 match = re.search(r'^(\s+)"', content, re.MULTILINE)
                 indent = match.group(1) if match else "  "
-                content = re.sub(r'^\{(\r?\n)', r'{\g<1>' + indent + f'"sci:doi": "{doi}",\n', content)
+                content = re.sub(r'^(\s*)\{(\r?\n)', r'\g<1>{\g<2>' + indent + f'"sci:doi": "{doi}",\n', content)
         else:
             # Insert sci:doi after the first { and its following newline
             match = re.search(r'^(\s+)"', content, re.MULTILINE)
             indent = match.group(1) if match else "  "
-            content = re.sub(r'^\{(\r?\n)', r'{\g<1>' + indent + f'"sci:doi": "{doi}",\n', content)
+            content = re.sub(r'^(\s*)\{(\r?\n)', r'\g<1>{\g<2>' + indent + f'"sci:doi": "{doi}",\n', content)
 
     # 2. Update/Insert Extensions
     ext_key = "conformsTo" if is_record else "stac_extensions"
@@ -115,7 +115,7 @@ def surgical_update(file_path: str, doi: str):
             match = re.search(r'^(\s+)"', content, re.MULTILINE)
             indent = match.group(1) if match else "  "
             ext_entry = f'{indent}"{ext_key}": [\n{indent}{indent}"{scientific_ext}"\n{indent}],\n'
-            content = re.sub(r'^\{(\r?\n)', r'{\g<1>' + ext_entry, content)
+            content = re.sub(r'^(\s*)\{(\r?\n)', r'\g<1>{\g<2>' + ext_entry, content)
 
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
