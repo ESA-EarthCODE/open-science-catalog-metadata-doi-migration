@@ -1,4 +1,7 @@
 {
+  "sci:publications": [
+    {"doi": "10.5281/zenodo.3565610"}
+  ],
   "type": "Collection",
   "id": "rainfall-prism-0-25-v4-africa-smos-rainfall",
   "stac_version": "1.0.0",
@@ -73,7 +76,7 @@
   "osc:type": "product",
   "created": "2018-07-30T00:00:00Z",
   "version": "4",
-  "sci:doi": "10.5281/zenodo.3565610",
+  "sci:doi": "10.84264/pfqr-9z43",
   "cf:parameter": [
     {
       "name": "rainfall_prism"
