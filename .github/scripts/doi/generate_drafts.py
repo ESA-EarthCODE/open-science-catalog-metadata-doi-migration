@@ -30,8 +30,12 @@ def surgical_update(file_path: str, doi: str):
             # If the current DOI is foreign (doesn't match our prefix)
             if not existing_val.startswith(prefix):
                 print(f"Migrating foreign DOI {existing_val} to sci:publications")
+                
+                # Sanitize the existing value to ensure it's a valid DOI pattern, not a URL
+                sanitized_val = existing_val.replace("https://doi.org/", "").replace("http://doi.org/", "")
+                
                 # Avoid adding it again if it's already there
-                if f'"{existing_val}"' not in content or '"sci:publications"' not in content:
+                if f'"{sanitized_val}"' not in content or '"sci:publications"' not in content:
                     if '"sci:publications"' in content:
                         # Append to existing sci:publications array
                         pub_match = re.search(r'("sci:publications"\s*:\s*\[[^\]]*)', content, re.DOTALL)
@@ -48,13 +52,13 @@ def surgical_update(file_path: str, doi: str):
                                         break
                             
                             sep = "," if not prefix_content.strip().endswith("[") else ""
-                            new_pub = f'{sep}\n{indent}{{"doi": "{existing_val}"}}'
+                            new_pub = f'{sep}\n{indent}{{"doi": "{sanitized_val}"}}'
                             content = content.replace(prefix_content, prefix_content + new_pub)
                     else:
                         # Create sci:publications array after the first {
                         match = re.search(r'^(\s+)"', content, re.MULTILINE)
                         indent = match.group(1) if match else "  "
-                        pub_entry = f'{indent}"sci:publications": [\n{indent}{indent}{{"doi": "{existing_val}"}}\n{indent}],\n'
+                        pub_entry = f'{indent}"sci:publications": [\n{indent}{indent}{{"doi": "{sanitized_val}"}}\n{indent}],\n'
                         content = re.sub(r'^(\s*)\{(\r?\n)', r'\g<1>{\g<2>' + pub_entry, content)
 
     # 2. Update/Insert sci:doi
