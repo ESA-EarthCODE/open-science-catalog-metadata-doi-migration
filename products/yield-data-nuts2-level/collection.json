@@ -1,4 +1,5 @@
 {
+    "sci:doi": "10.84264/m7e8-yn04",
     "type": "Collection",
     "id": "yield-data-nuts2-level",
     "stac_version": "1.0.0",
@@ -58,7 +59,8 @@
     ],
     "stac_extensions": [
       "https://stac-extensions.github.io/osc/v1.0.0/schema.json",
-      "https://stac-extensions.github.io/themes/v1.0.0/schema.json"
+      "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
+      "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
     ],
     "osc:project": "yipeeo",
     "osc:status": "completed",

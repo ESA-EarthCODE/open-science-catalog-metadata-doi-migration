@@ -1,4 +1,7 @@
 {
+  "sci:publications": [
+    {"doi": "10.20350/digitalCSIC/13859"}
+  ],
   "type": "Collection",
   "id": "baltic-sea-surface-salinity-l3-baltic-salinity-dynamics",
   "stac_version": "1.0.0",
@@ -74,7 +77,7 @@
   "osc:type": "product",
   "created": "2021-01-19T00:00:00Z",
   "version": "2",
-  "sci:doi": "10.20350/digitalCSIC/13859",
+  "sci:doi": "10.84264/ccaf-cj59",
   "cf:parameter": [
     {
       "name": "sea_surface_salinity"
