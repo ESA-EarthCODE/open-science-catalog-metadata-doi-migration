@@ -1,5 +1,5 @@
 {
-  "sci:doi": "10.84275/s652-z602",
+  "sci:doi": "10.84275/fdjb-zd09",
   "type": "Collection",
   "id": "4d-atlantic-ohc-global",
   "stac_version": "1.1.0",
@@ -118,7 +118,7 @@
   "osc:variables": [
     "ocean-heat-budget"
   ],
-  "title": "Global Ocean Heat Content",
+  "title": "Global Ocean Heat Content - change to trigger new version (v2)",
   "extent": {
     "spatial": {
       "bbox": [
