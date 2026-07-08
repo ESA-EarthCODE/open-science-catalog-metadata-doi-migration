@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.5194/tc-14-539-2020"}
-  ],
   "type": "Collection",
   "id": "surface-melting-antarctica-cryosmos",
   "stac_version": "1.0.0",
@@ -70,7 +67,7 @@
   "osc:region": "Antarctica",
   "osc:type": "product",
   "created": "2020-03-19T00:00:00Z",
-  "sci:doi": "10.84264/x9kf-6943",
+  "sci:doi": "10.5194/tc-14-539-2020",
   "cf:parameter": [
     {
       "name": "surface_melting"

@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.22008/FK2/F9P03L"}
-  ],
   "type": "Collection",
   "id": "geothermal-heat-flow-greenland-3d-earth",
   "stac_version": "1.0.0",
@@ -76,7 +73,7 @@
   "osc:region": "Arctic",
   "osc:type": "product",
   "created": "2021-08-26T00:00:00Z",
-  "sci:doi": "10.84264/fwhn-cm62",
+  "sci:doi": "10.22008/FK2/F9P03L",
   "cf:parameter": [
     {
       "name": "geothermal_heat_flow"

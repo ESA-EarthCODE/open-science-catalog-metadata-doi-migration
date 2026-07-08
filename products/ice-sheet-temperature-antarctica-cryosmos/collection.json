@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.1016/j.rse.2019.111405"}
-  ],
   "type": "Collection",
   "id": "ice-sheet-temperature-antarctica-cryosmos",
   "stac_version": "1.0.0",
@@ -70,7 +67,7 @@
   "osc:region": "Antarctica",
   "osc:type": "product",
   "created": "2020-03-19T00:00:00Z",
-  "sci:doi": "10.84264/gvwa-wv32",
+  "sci:doi": "10.1016/j.rse.2019.111405",
   "cf:parameter": [
     {
       "name": "ice_sheet_temperature"

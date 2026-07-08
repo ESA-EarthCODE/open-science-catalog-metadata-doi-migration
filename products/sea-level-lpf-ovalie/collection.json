@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.5281/zenodo.1487983"}
-  ],
   "type": "Collection",
   "id": "sea-level-lpf-ovalie",
   "stac_version": "1.0.0",
@@ -69,7 +66,7 @@
   "osc:region": "Global",
   "osc:type": "product",
   "created": "2018-11-14T00:00:00Z",
-  "sci:doi": "10.84264/23h8-7m13",
+  "sci:doi": "10.5281/zenodo.1487983",
   "cf:parameter": [
     {
       "name": "sea_level_trends"

@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.22008/FK2/SD56CB"}
-  ],
   "type": "Collection",
   "id": "nrt-sice-rasters-greenland-arctic-sice",
   "stac_version": "1.0.0",
@@ -70,7 +67,7 @@
   "osc:region": "Arctic",
   "osc:type": "product",
   "created": "2021-01-01T00:00:00Z",
-  "sci:doi": "10.84264/cram-cv73",
+  "sci:doi": "10.22008/FK2/SD56CB",
   "cf:parameter": [
     {
       "name": "nrt_sice_rasters"

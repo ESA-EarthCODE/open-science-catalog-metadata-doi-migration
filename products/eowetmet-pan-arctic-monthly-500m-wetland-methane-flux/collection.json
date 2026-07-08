@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.5281/zenodo.20545323"}
-  ],
   "type": "Collection",
   "id": "eowetmet-pan-arctic-monthly-500m-wetland-methane-flux",
   "stac_version": "1.0.0",
@@ -95,7 +92,7 @@
       ]
     }
   ],
-  "sci:doi": "10.84264/dd5w-1j85",
+  "sci:doi": "10.5281/zenodo.20545323",
   "cf:parameter": [
     {
       "name": "methane"

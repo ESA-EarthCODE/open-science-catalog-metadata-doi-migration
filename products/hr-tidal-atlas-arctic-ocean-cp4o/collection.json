@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.1016/j.asr.2018.01.007"}
-  ],
   "type": "Collection",
   "id": "hr-tidal-atlas-arctic-ocean-cp4o",
   "stac_version": "1.0.0",
@@ -81,7 +78,7 @@
   "osc:region": "Arctic",
   "osc:type": "product",
   "created": "2015-02-23T00:00:00Z",
-  "sci:doi": "10.84264/nns1-sp23",
+  "sci:doi": "10.1016/j.asr.2018.01.007",
   "cf:parameter": [
     {
       "name": "high_resolution_tidal_atlas"
