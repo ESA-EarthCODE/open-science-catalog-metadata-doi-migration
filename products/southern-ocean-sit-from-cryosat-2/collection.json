@@ -1,5 +1,4 @@
 {
-  "sci:doi": "10.84264/4ka3-eb09",
   "type": "Collection",
   "id": "southern-ocean-sit-from-cryosat-2",
   "stac_version": "1.0.0",
@@ -89,8 +88,7 @@
   "stac_extensions": [
     "https://stac-extensions.github.io/osc/v1.0.0/schema.json",
     "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/cf/v0.2.0/schema.json",
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/cf/v0.2.0/schema.json"
   ],
   "osc:project": "cryosat-antarctic-ocean",
   "osc:status": "completed",

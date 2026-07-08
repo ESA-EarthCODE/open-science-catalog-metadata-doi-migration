@@ -1,7 +1,4 @@
 {
-    "sci:publications": [
-        {"doi": "10.12770/38b4aa0d-c57b-435f-b0b1-fd9df32686c7"}
-    ],
     "type": "Collection",
     "id": "sargassum-transport-tropical-atlantic-case1-world-ocean-circulation",
     "stac_version": "1.0.0",
@@ -56,15 +53,14 @@
     "stac_extensions": [
       "https://stac-extensions.github.io/osc/v1.0.0/schema.json",
       "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-      "https://stac-extensions.github.io/cf/v0.2.0/schema.json",
-      "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+      "https://stac-extensions.github.io/cf/v0.2.0/schema.json"
     ],
     "osc:project": "world-ocean-circulation",
     "osc:status": "completed",
     "osc:region": "Tropical Atlantic",
     "osc:type": "product",
     "created": "2021-11-30T00:00:00Z",
-    "sci:doi": "10.84264/zthr-2b16",
+    "sci:doi": "10.12770/38b4aa0d-c57b-435f-b0b1-fd9df32686c7",
     "cf:parameter": [
       {
         "name": "sargassum_transport"

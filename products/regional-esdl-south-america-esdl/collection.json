@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.5281/zenodo.5068004"}
-  ],
   "type": "Collection",
   "id": "regional-esdl-south-america-esdl",
   "stac_version": "1.0.0",
@@ -68,7 +65,7 @@
   "osc:status": "completed",
   "osc:region": "South America",
   "osc:type": "product",
-  "sci:doi": "10.84264/ac53-ar52",
+  "sci:doi": "10.5281/zenodo.5068004",
   "cf:parameter": [
     {
       "name": "regional_esdl"

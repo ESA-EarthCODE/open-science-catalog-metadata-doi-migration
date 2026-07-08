@@ -1,7 +1,4 @@
 {
-  "sci:publications": [
-    {"doi": "10.5281/zenodo.5006307"}
-  ],
   "type": "Collection",
   "id": "surface-soil-moisture-s1-for-surface-soil-moisture",
   "stac_version": "1.0.0",
@@ -70,7 +67,7 @@
   "osc:region": "South Italy",
   "osc:type": "product",
   "created": "2021-03-16T00:00:00Z",
-  "sci:doi": "10.84264/4b1m-7334",
+  "sci:doi": "10.5281/zenodo.5006307",
   "cf:parameter": [
     {
       "name": "surface_soil_moisture"
