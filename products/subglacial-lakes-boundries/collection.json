@@ -1,4 +1,7 @@
 {
+  "sci:publications": [
+    {"doi": "10.5281/zenodo.16330564"}
+  ],
   "type": "Collection",
   "id": "subglacial-lakes-boundries",
   "stac_version": "1.0.0",
@@ -99,7 +102,7 @@
       ]
     }
   ],
-  "sci:doi": "10.5281/zenodo.16330564",
+  "sci:doi": "10.84264/pgdk-jt28",
   "cf:parameter": [
     {
       "name": "subglacial-lake-extent"

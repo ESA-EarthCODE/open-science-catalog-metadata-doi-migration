@@ -1,4 +1,5 @@
 {
+  "sci:doi": "10.84264/e0ns-pf56",
   "type": "Collection",
   "id": "glacier-surface-flow-velocity-alpglacier",
   "stac_version": "1.0.0",
@@ -59,7 +60,8 @@
   "stac_extensions": [
     "https://stac-extensions.github.io/osc/v1.0.0/schema.json",
     "https://stac-extensions.github.io/themes/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/cf/v0.2.0/schema.json"
+    "https://stac-extensions.github.io/cf/v0.2.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
   ],
   "osc:project": "alpglacier",
   "osc:status": "completed",
