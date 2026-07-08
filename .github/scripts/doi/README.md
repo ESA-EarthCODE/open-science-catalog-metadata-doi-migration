@@ -10,7 +10,7 @@ The system automatically identifies the need for a DOI or an update by comparing
 
 - **New Item:** A STAC Collection (`products/**/collection.json`) or OGC Record (`workflows/**/record.json`) lacks the `sci:doi` property.
 - **Historical Baseline Detection:** For items with existing DOIs, the system searches for a baseline in this priority order:
-    1. **Version Tags:** The commit of the highest version tag (`<id>-v*`).
+    1. **Version Tags:** The commit of the highest version tag (`<stac_type>-<id>-v*`). By prefixing with `product-` or `workflow-`, the system prevents namespace collisions between identically named items.
     2. **String Match:** The last commit that modified the `"sci:doi"` string (fallback for untagged legacy items).
     3. **Permissive Baseline:** If neither are found, the current state (`HEAD`) is assumed to be the validated baseline ("v1").
 - **Significant Change:** A new DOI draft is triggered if any of the following fields have been modified relative to the detected baseline: `title`, `description`, `keywords`, `providers`, `extent`, or `links`.
@@ -34,7 +34,7 @@ When a DOI assignment PR is merged into `main`:
 
 ### 4. Versioned GitHub Pages Deployment
 On every push to `main`, the system builds a versioned static site:
-- **Tag-Based History:** The system extracts historical versions strictly based on Git tags (`<item-id>-v*`).
+- **Tag-Based History:** The system extracts historical versions strictly based on Git tags (`<stac_type>-<item-id>-v*`).
 - **Recursive Item Versioning:** For every Collection version, the system identifies associated local STAC Items (via `rel: "item"` links) and saves snapshots of them at the exact same tagged commit.
 - **Link Rewriting:** Versioned Collections are updated to point to their corresponding versioned Items, ensuring a consistent point-in-time snapshot.
 - **Navigation Links:** Each JSON file is injected with STAC-compliant links for navigation:
@@ -90,6 +90,6 @@ The following configurations must be set in the GitHub repository for the workfl
 - **Manual Reverts (The "Veto"):** If the automated PR proposes a DOI update that is not desired (e.g., a false positive or an insignificant change):
     1.  Manually edit the PR branch and revert the `sci:doi` field to its previous value (or remove it if it was new).
     2.  The publication workflow (`publish_dois.py`) only publishes DOIs that are present and modified in the merge commit. Reverting the field ensures no DOI action is taken.
-    3.  **Baseline Note:** Since the historical baseline is driven by **Git Tags** (`<id>-v*`), a vetoed item will be flagged again by the next audit if the significant changes remain. To stop future audits from flagging the item, you must either revert the significant changes, accept the DOI, or use `osc:skip_doi`.
+    3.  **Baseline Note:** Since the historical baseline is driven by **Git Tags** (`<stac_type>-<id>-v*`), a vetoed item will be flagged again by the next audit if the significant changes remain. To stop future audits from flagging the item, you must either revert the significant changes, accept the DOI, or use `osc:skip_doi`.
 - **Version Tags as Baselines:** The baseline for change detection only advances when a new version tag is created. This happens automatically when a new DOI is published. If you need to "approve" a metadata state as the new baseline *without* updating the DOI, you would need to manually create and push a new version tag for that item.
 - **Persistent State:** For untagged legacy items, the system defaults to a **Permissive Baseline**, treating the current repository state as the initial validated version.
