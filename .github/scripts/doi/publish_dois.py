@@ -158,13 +158,16 @@ def main():
             # Check if it's a draft on DataCite
             try:
                 state = client.get_doi_state(doi)
+                
+                # Extract common properties needed for both publishing and tag fast-forwarding
+                properties = stac_item.get("properties", stac_item)
+                stac_id = properties.get("id", stac_item.get("id"))
+                raw_type = properties.get("osc:type", stac_item.get("osc:type", properties.get("type", "product")))
+                stac_type = "workflow" if raw_type == "workflow" else "product"
+                
                 if state == "draft":
                     print(f"Publishing DOI {doi} for {file_path} (State: {state})")
                     # Construct target URL with version suffix
-                    stac_id = stac_item.get("id")
-                    properties = stac_item.get("properties", stac_item)
-                    raw_type = properties.get("osc:type", stac_item.get("osc:type", properties.get("type", "product")))
-                    stac_type = "workflow" if raw_type == "workflow" else "product"
                     suffix = "/collection" if stac_type == "product" else "/record"
                     
                     next_version = get_next_version(stac_id, stac_type)
