@@ -57,6 +57,47 @@ def get_file_diff_in_last_commit(file_path):
     except Exception:
         return True # Fallback to true if we can't check diff
 
+def move_tag_to_head(tag_name):
+    """Moves an existing tag to the current HEAD and pushes it."""
+    try:
+        print(f"Fast-forwarding tag {tag_name} to HEAD to capture non-significant changes.")
+        subprocess.check_call(["git", "tag", "-f", "-a", tag_name, "-m", f"Fast-forward {tag_name} for non-significant updates"])
+        subprocess.check_call(["git", "push", "-f", "origin", tag_name])
+    except Exception as e:
+        print(f"Error moving tag {tag_name}: {e}")
+
+def get_latest_tag(stac_id, stac_type):
+    """Returns the name of the latest tag for the item, or None."""
+    try:
+        tag_prefix = f"{stac_type}-{stac_id}"
+        tags = subprocess.check_output(
+            ["git", "tag", "-l", f"{tag_prefix}-v*"],
+            stderr=subprocess.DEVNULL
+        ).decode("utf-8").splitlines()
+        
+        tag_versions = []
+        for t in tags:
+            match = re.match(rf"^{re.escape(tag_prefix)}-v(\d+)$", t)
+            if match:
+                tag_versions.append((int(match.group(1)), t))
+                
+        if tag_versions:
+            return sorted(tag_versions, reverse=True)[0][1]
+        return None
+    except Exception:
+        return None
+
+def has_file_changed_since_tag(file_path, tag_name):
+    """Checks if the file has differences between the given tag and HEAD."""
+    try:
+        diff = subprocess.check_output(
+            ["git", "diff", tag_name, "HEAD", "--", file_path],
+            stderr=subprocess.DEVNULL
+        ).decode("utf-8")
+        return bool(diff.strip())
+    except Exception:
+        return False
+
 def get_next_version(stac_id, stac_type):
     """Calculates the next version number based on existing git tags, using type prefixes to avoid collisions."""
     try:
@@ -138,6 +179,12 @@ def main():
                     published_count += 1
                 else:
                     print(f"Skipping {file_path}: DOI {doi} is already in state '{state}'.")
+                    # Even if the DOI is published, we might have merged non-significant changes
+                    # that need to be reflected in the GitHub pages deployment (which builds from tags).
+                    latest_tag = get_latest_tag(stac_id, stac_type)
+                    if latest_tag and has_file_changed_since_tag(file_path, latest_tag):
+                        move_tag_to_head(latest_tag)
+                        
             except Exception as e:
                 print(f"Failed to check or publish DOI {doi} for {file_path}: {e}")
 

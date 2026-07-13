@@ -27,7 +27,8 @@ The system automatically identifies the need for a DOI or an update by comparing
     1. **Version Tags:** The commit of the highest version tag (`<stac_type>-<id>-v*`). By prefixing with `product-` or `workflow-`, the system prevents namespace collisions between identically named items.
     2. **String Match:** The last commit that modified the `"sci:doi"` string (fallback for untagged legacy items).
     3. **Permissive Baseline:** If neither are found, the current state (`HEAD`) is assumed to be the validated baseline ("v1").
-- **Significant Change:** A new DOI draft is triggered if any of the following fields have been modified relative to the detected baseline: `title`, `description`, `keywords`, `providers`, `extent`, or `links`.
+- **Significant Change:** A new DOI draft is triggered by **ANY** change to the STAC metadata fields *except* for modifications to: `description`, `keywords`, `providers`, or `license`. Changes strictly confined to those four properties are considered non-significant and will not generate a new DOI.
+- **Tag Fast-Forwarding:** If a file receives non-significant updates (like correcting a typo in the description) and is merged into `main`, no new DOI is published. However, the system will automatically **fast-forward** the file's current version tag (e.g., `product-<id>-v1`) to the latest commit. This ensures that the GitHub Pages deployment (which builds explicitly from tagged commits) reflects the corrected metadata without cluttering the DataCite registry with unnecessary versions.
 - **Workflow Triggers:**
 ...
     - **Pull Requests:** When a PR is opened or updated, the system automatically audits the changed files. If a DOI is needed, it generates/updates a draft and **auto-commits** the change back to the PR branch (handling forks via `pull_request_target`).

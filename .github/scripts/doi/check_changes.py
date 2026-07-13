@@ -69,27 +69,31 @@ def get_last_version_tag_commit(stac_id: str, stac_type: str) -> Optional[str]:
 def is_significant_change(current: Dict[str, Any], historical: Dict[str, Any]) -> bool:
     """
     Checks if metadata fields relevant to DataCite have changed.
-    Includes title, description, keywords, providers, extent, and links.
+    Triggers on ANY change EXCEPT: description, keywords, providers, or license.
     """
-    # Handle OGC Record structure where most fields are in properties
-    curr_props = current.get("properties", current)
-    hist_props = historical.get("properties", historical)
-
-    # Fields that might be in 'properties' (Workflows) or top-level (Products)
-    fields_to_check = ["title", "description", "keywords", "providers", "extent"]
+    import copy
     
-    for field in fields_to_check:
-        if curr_props.get(field) != hist_props.get(field):
-            return True
+    # Deep copy to avoid mutating the original dictionaries
+    curr_copy = copy.deepcopy(current)
+    hist_copy = copy.deepcopy(historical)
     
-    # Check Links (typically top-level in both, but we check both just in case)
-    if current.get("links") != historical.get("links"):
-        return True
-    
-    if curr_props.get("links") != hist_props.get("links"):
-        return True
+    def remove_ignored_fields(data_dict: Dict[str, Any]):
+        ignored_fields = ["description", "keywords", "providers", "license"]
         
-    return False
+        # Remove from top-level (Products)
+        for field in ignored_fields:
+            data_dict.pop(field, None)
+            
+        # Remove from properties (Workflows / OGC Records)
+        if "properties" in data_dict and isinstance(data_dict["properties"], dict):
+            for field in ignored_fields:
+                data_dict["properties"].pop(field, None)
+                
+    remove_ignored_fields(curr_copy)
+    remove_ignored_fields(hist_copy)
+    
+    # Compare the sanitized dictionaries
+    return curr_copy != hist_copy
 
 def check_doi_need(file_path: str) -> Tuple[bool, Optional[str]]:
     """
