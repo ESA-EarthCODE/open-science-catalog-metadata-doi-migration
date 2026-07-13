@@ -1,14 +1,28 @@
 # DOI Assignment System
 
-This directory contains the logic and automation for assigning [DataCite](https://datacite.org/) DOIs to STAC Collections (Products and Workflows) within the Open Science Catalog.
+This directory contains the logic and automation for assigning Digital Object Identifiers (DOI) record supported by [DataCite](https://datacite.org/) DOIs (official DOI Registration Agency) to existing or newly created Products and Workflows described and published as STAC Collections in the [Open Science Catalogue](https://opensciencedata.esa.int/).
 
 ## Logic & Architecture
 
-The system follows a **Research -> Strategy -> Execution** lifecycle, implemented via an automated Pull Request workflow and a versioned deployment process.
+The system follows a **Research -> Strategy -> Execution** lifecycle, implemented via an automated Pull Request workflow and a versioned deployment process which starts once the new or modfied product or workflow is added to open-science-metadata repository via Pull Request. 
+
 ### 1. Detection & Automation Phase
 The system automatically identifies the need for a DOI or an update by comparing the current file state against its **official historical baseline**.
 
-- **New Item:** A STAC Collection (`products/**/collection.json`) or OGC Record (`workflows/**/record.json`) lacks the `sci:doi` property.
+- **New Item:** A STAC Collection (`products/<product-id>/collection.json`) or OGC Record (`workflows/<workflow-id>/record.json`) lacks the `sci:doi` property. For example:
+  * Before DOI assignment:
+  ```json
+    {
+      "id": "example-product"
+    }
+  ```
+  * After DOI assigned:
+  ```json
+  {
+    "id": "example-product",
+    "sci:doi": "10.xxxx/example"
+  }
+  ```
 - **Historical Baseline Detection:** For items with existing DOIs, the system searches for a baseline in this priority order:
     1. **Version Tags:** The commit of the highest version tag (`<stac_type>-<id>-v*`). By prefixing with `product-` or `workflow-`, the system prevents namespace collisions between identically named items.
     2. **String Match:** The last commit that modified the `"sci:doi"` string (fallback for untagged legacy items).
